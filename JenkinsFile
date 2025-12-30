@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    // Jenkins checks the repo every 2 minutes
+    triggers {
+        pollSCM('H/2 * * * *')
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/mibrahimj1122-sudo/FinalExam.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing dependencies...'
+                // sh 'pip install -r requirements.txt'   <-- if you have one
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                echo 'Running unit tests...'
+               
+            }
+        }
+
+        stage('Build App') {
+            steps {
+                echo 'Building app...'
+            }
+        }
+
+        stage('Deploy App') {
+            steps {
+                echo 'Deploying app...'
+                
+            }
+        }
+    }
+
+    post {
+        success { echo 'Pipeline completed successfully!' }
+        failure { echo 'Pipeline failed!' }
+    }
+}
